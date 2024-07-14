@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PostController extends Controller
@@ -14,24 +14,34 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-        return inertia('Home');
+        // $posts = Post::all(); // get all list
+        // $posts = Post::latest()->get(); //get all list sorted to latest
+        $posts = Post::latest()->paginate(6);
+        return inertia('Home', ['posts' => $posts]);
     }
 
-    /**
+    /** 
      * Show the form for creating a new resource.
      */
     public function create()
     {
         //
+        return inertia('Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
-        //
+        sleep(2);
+        $fields = $request->validate([
+            'body' => ['required']
+        ]);
+        
+        Post::create($fields);
+
+        return redirect('/');
     }
 
     /**
@@ -53,7 +63,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
         //
     }

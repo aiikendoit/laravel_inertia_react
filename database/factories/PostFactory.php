@@ -18,6 +18,7 @@ class PostFactory extends Factory
     {
         return [
             //
+            'body' => fake()->text(),
         ];
     }
 }

@@ -13,7 +13,7 @@ export default function Home({ posts }) {
 
     setTimeout(() => {
         setFlashMsg(null);
-    }, 3000);
+    }, 2000);
 
     console.log(usePage());
 
@@ -31,6 +31,12 @@ export default function Home({ posts }) {
             {flashMsg && (
                 <div className="absolute top-24 right-6 bg-rose-500 p-2 rounded-md shadow-lg text-sm text-white">
                     {flashMsg}
+                </div>
+            )}
+
+            {flash.success && (
+                <div className="absolute top-24 right-6 bg-green-500 p-2 rounded-md shadow-lg text-sm text-white">
+                    {flash.success}
                 </div>
             )}
 

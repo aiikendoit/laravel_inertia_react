@@ -38,7 +38,7 @@ class PostController extends Controller
         $fields = $request->validate([
             'body' => ['required']
         ]);
-        
+
         Post::create($fields);
 
         return redirect('/');
@@ -49,7 +49,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return inertia('Show', ['post' => $post]);
     }
 
     /**
@@ -74,5 +74,10 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+        // dd($post);
+
+        $post->delete();
+
+        return redirect('/')->with('message', 'The post deleted successfully!');
     }
 }
